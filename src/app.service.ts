@@ -1,8 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { accessSecretVersion } from './utils/secretManager.util';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello Nest Test';
+  async getHello(): Promise<string> {
+    const secretValue = await accessSecretVersion();
+
+    return secretValue;
   }
 }
