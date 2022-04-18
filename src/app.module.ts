@@ -31,21 +31,16 @@ import { UsersModule } from './users/users.module';
       useFactory: () => ({
         type: 'postgres',
 
-        // host: '/cloudsql/cloudpayroll-dev:europe-west2:nest-test-db', // Connection (Doesn't deploy 2)
-        // host: '10.77.80.3', // Private IP (Doesn't deploy 2)
-        // host: '34.89.33.30', // Public IP (Works locally, Doesn't deploy)
-        // host: '34.89.127.167', // DB2 works local
-        host: '/cloudsql/cloudpayroll-dev:europe-west2:nest-test-db2',
+        host: '127.0.0.1', // Proxy
+        port: 1234, // Proxy
+
+        // host: '/cloudsql/cloudpayroll-dev:europe-west2:nest-test-db2',
+
         extra: {
           socketPath: '/cloudsql/cloudpayroll-dev:europe-west2:nest-test-db2',
         },
+
         database: 'postgres',
-        // port: 5432,
-        // host: '127.0.0.1', // Proxy
-        // port: 1234, // Proxy
-        // username: 'postgres',
-        // password: '5APs4Edojig6fml7',
-        // username: 'test_user_1',
         username: 'postgres',
         password: '109876543210',
         autoLoadEntities: true,
@@ -60,8 +55,8 @@ import { UsersModule } from './users/users.module';
     ConfigModule.forRoot({
       envFilePath: ['.env'],
       validationSchema: Joi.object({
-        DATABASE_HOST: Joi.required(),
-        DATABASE_PORT: Joi.number().default(5432),
+        // DATABASE_HOST: Joi.required(),
+        // DATABASE_PORT: Joi.number().default(5432),
         DATABASE_USER: Joi.required(),
         DATABASE_PASSWORD: Joi.required(),
         DATABASE_NAME: Joi.required(),
